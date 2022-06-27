@@ -1,0 +1,236 @@
+---
+title: "**SGA - Monitoreo de Adquisiciones**"
+output: 
+  flexdashboard::flex_dashboard:
+        vertical_layout: scroll
+        orientation: rows
+        #theme: cerulean
+        theme: lumen
+        favicon: logo_sga_rojo.png
+        logo: logoMSAL35pctn.png
+---
+
+```{r echo=F, warning=FALSE, message=FALSE}
+#E)Traigo la tabla final
+library(R.utils)
+#importo base SCO
+tablafinalEP<-loadObject("../resultados/base_tabladinamicaEP.Rbin")
+#importo base TRATAMIENTOS
+tabla.tramitaciones.doc<-loadObject("../resultados/tabla.tramitaciones.doc.Rbin")
+library(dplyr)
+tabla.para.indicadores1<-tablafinalEP %>% 
+  select(`Estado Pliego`, reparticion.actual.agrup,
+         `Días desde autorización`, dias_ultimo_pase,MontoSolic)
+tabla.tramitaciones.doc$MontoSolic<-0
+tabla.para.indicadores2<-tabla.tramitaciones.doc %>% 
+  select(`Etapa del proceso`, `Repartición actual`,
+         `Dias desde el inicio`, `Días desde el último pase`,MontoSolic)
+
+nombres<-c("Etapa del proceso", "Repartición actual", 
+           "Dias desde el inicio", "Días desde el último pase","Monto solicitado")
+names(tabla.para.indicadores1)<-nombres
+names(tabla.para.indicadores2)<-nombres
+tabla.para.indicadores<-rbind(tabla.para.indicadores1, tabla.para.indicadores2)
+
+```
+
+```{r}
+## para unir tabla programas y hacer todo en una tabla ##
+tablafinalEP$Acrónimo <-"Sin dato"
+tabla.tramitaciones.doc$Secretaría<-"Sin dato"
+tabla.tramitaciones.doc$`Programa Descripción`<-"Sin dato"
+tabla.tramitaciones.doc$`Nro. Pliego`<-"Sin dato"
+tabla.tramitaciones.doc$MontoSolic<-"Sin dato"
+
+tabla_final_2<-tablafinalEP [,c("Estado Pliego","Acrónimo","Nombre pliego","NumExpediente","Repartición actual","Usuario actual", "Días desde la creación del proceso","dias_ultimo_pase", "Secretaría","Descripción Detallada","Nro. Pliego","MontoSolic")] 
+
+names(tabla_final_2)<-names(tabla.tramitaciones.doc)
+
+## une comprar con financiemiento internacional 
+tabla_completa<-rbind(tabla.tramitaciones.doc,tabla_final_2)
+
+#cambio el nombre a las variables por uno mas entendible
+names(tabla_completa)<-c("Estado Pliego",
+                         "Acrónimo", 
+                         "Nombre del proceso",
+                         "Expediente",
+                         "Repartición donde se encuentra",
+                         "Usuario actual",
+                         "Días desde el inicio",
+                         "Días desde el último pase",
+                         "Secretaría",
+                         "Descripción del Programa",
+                         "Nro. Pliego",
+                         "Monto solicitado")
+```
+
+Indicadores 
+===================================== 
+
+Row {.sidenav data-height=180, data-width=150}
+-----------------------------------------------------------------------
+
+### **Procesos de adquisiciones en curso desde el momento en que se genera el expediente hasta el perfeccionamiento contractual, para todas las modalidades de compra y todas las fuentes de financiamiento**
+```{r fila8a}
+##A)Seleccion de variables 
+library(flexdashboard)
+valueBox("Incluye",
+         #value = shiny::tags$p("Incluye", style = "font-size: 4px;"),
+         icon="fa-comments", col="#303F9F")
+```
+
+### **Importe a comprometer.**
+```{r fila10a}
+library(flexdashboard)
+valueBox(paste("$ M ",
+round(sum(as.numeric(tabla.para.indicadores$`Monto solicitado`), na.rm=T)/1000000,0),sep=""),
+         icon="fa-money",col="info")
+```
+
+### **Cantidad total de Procesos**
+```{r fila11a}
+library(flexdashboard)
+valueBox(nrow(tabla.para.indicadores),
+         icon="fa-pencil",col="#E68BFB")
+```
+
+### **Días desde el incio del proceso.**
+```{r fila12a}
+library(flexdashboard)
+valueBox(paste(
+"Mediana: ", round(median(as.numeric(tabla.para.indicadores$`Dias desde el inicio`), na.rm=T),0),"/",
+"RI:",round(IQR(as.numeric(tabla.para.indicadores$`Dias desde el inicio`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="red")
+```
+
+### **Días que un proceso no registra movimiento**
+```{r fila13a}
+library(flexdashboard)
+valueBox(paste(
+"Mediana: ", round(median(as.numeric(tabla.para.indicadores$`Días desde el último pase`), na.rm=T),0),"/",
+"RI:",round(IQR(as.numeric(tabla.para.indicadores$`Días desde el último pase`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="#FFC300")
+```
+
+Row {data-width=50% data-height=500}
+-----------------------------------------------------------------------
+
+### 
+```{r fila21}
+library(plotly)
+library(dplyr)
+#grafico por etapas
+tabla.etapaproc<-tabla.para.indicadores %>% 
+  group_by(`Etapa del proceso`) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#modifico el orden del factor ubicacion
+#tabla.etapaproc$`Estado Pliego`<-factor(
+#  as.factor(tabla.etapaproc$`Estado Pliego`),
+#  levels= c("5-Proceso de adjudicación", "4-Evaluación", "3-Apertura",
+#            "2-Publicado", "1-Proceso iniciado ", "0-Sin informar"))
+
+plot_ly(as.data.frame(tabla.etapaproc), 
+        y = ~`Cantidad de expedientes`, 
+        x = ~`Etapa del proceso`, 
+        type = 'bar', orientation = 'v',
+        marker = list(color = '#b52a0c',
+                      line = list(color = 'rgb(8,48,107)',
+                                         width = 1.5)))%>% 
+  layout(title = "Cantidad de Procesos según etapa",
+        font=list(family = "sans serif", size = 13, color = '#000000'),
+        xaxis = list(title = ""),
+        yaxis = list(title = ""))
+#%>% 
+#    layout(autosize = F, width = 700, height = 520)
+#,
+
+```
+
+###
+```{r fila22}
+#grafico expedientes por reparticion
+tabla.reparti<-tabla.para.indicadores %>% 
+  group_by(`Repartición actual`) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#subplot(
+plot_ly(tabla.reparti, 
+       labels = ~`Repartición actual`, 
+       values = ~`Cantidad de expedientes`, type = 'pie',
+       textposition = 'inside',
+       textinfo = 'percent') %>% 
+  layout(title = 'Cantidad de Procesos según ubicación actual', 
+         font=list(family = "sans serif", size = 13, color = '#000000'),
+         xaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         yaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         legend = list(font = list(size = 12))) %>% 
+    layout(autosize = F, width = 550, height = 520)
+
+```
+
+```{r}
+tabla_completa$`Monto solicitado` <- as.numeric(tabla_completa$`Monto solicitado`)
+tabla_completa$`Monto solicitado` <- format(tabla_completa$`Monto solicitado`, big.mark = ".")
+tabla_completa$`Monto solicitado` <- ifelse(gsub(" ","",tabla_completa$`Monto solicitado`)=="NA","",tabla_completa$`Monto solicitado`)
+```
+
+
+Listado de Procesos 
+===================================== 
+
+```{r}
+#cambio el nombre a las variables por uno mas entendible
+names(tabla_completa)<-c("Estado del proceso",
+                         "Acrónimo", 
+                         "Nombre del proceso",
+                         "Expediente",
+                         "Repartición donde se encuentra",
+                         "Usuario actual",
+                         "Días desde el inicio",
+                         "Días desde el último pase",
+                         "Secretaría",
+                         "Descripción del programa",
+                         "Nro. Pliego",
+                         "Monto solicitado")
+
+## cambio nombre a subsecretaría de gestión administrativa
+
+tabla_completa$Secretaría<-ifelse(tabla_completa$Secretaría=="Subsecretaría de Gestión Administrativa","Secretaría de Gestión Administrativa",tabla_completa$Secretaría)
+
+library(DT)
+tabla_completa [,c(1:2,10,3,11,12,4:9)] %>%
+  arrange(desc(`Días desde el último pase`))%>%
+datatable(extensions = 'Buttons', 
+          options = list(initComplete = 
+                           JS("function(settings, json){",                     "$(this.api().table().header()).css({'background-color': '#303F9F', 'color': '#fff'});",
+                              "}"),
+                         scrollY =F,
+                         dom = 'Blfrtip',
+                         buttons = c('csv', 'excel', 'pdf'),
+                         pageLength = 200, 
+                         lengthMenu = list(c(100, 200, 500, -1),
+                                           c(100, 200, 500,"Todo")),
+                         autoWidth = TRUE),
+          caption = "Se puede exportar a formatos csv, pdf y xls, conservando los filtros aplicados",
+          filter = 'top',
+          #order("Días desde el último pase"),
+          class = 'cell-border stripe',
+          callback = JS("return table;"), 
+          rownames=F,
+          escape = TRUE,
+          style = "default", width = NULL, height = NULL, elementId = NULL,
+          fillContainer = getOption("DT.fillContainer", NULL),
+          autoHideNavigation = getOption("DT.autoHideNavigation", NULL),
+          selection = c("multiple", "single", "none"), 
+          plugins = NULL, editable  = FALSE) %>%
+  formatStyle("Monto solicitado",'text-align'="right") 
+
+```
+

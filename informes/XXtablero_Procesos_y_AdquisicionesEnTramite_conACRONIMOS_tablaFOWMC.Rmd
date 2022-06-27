@@ -1,0 +1,234 @@
+---
+title: "**SGA - Tablero de Adquisiciones**"
+output: 
+  flexdashboard::flex_dashboard:
+        vertical_layout: scroll
+        orientation: rows
+        #theme: cerulean
+        theme: lumen
+        favicon: logo_sga_rojo.png
+        logo: logoMSAL35pctn.png
+---
+
+```{r echo=F, warning=FALSE, message=FALSE}
+#E)Traigo la tabla final
+library(R.utils)
+library(dplyr)
+#importo base 
+tablafinal<-loadObject("../resultados/base_tabla_reporte.Rbin") %>% 
+  ungroup()
+```
+Indicadores 
+===================================== 
+
+Row {.sidenav data-height=180, data-width=150}
+-----------------------------------------------------------------------
+
+```{r}
+library(readxl)
+library(tidyverse)
+### traigo TC al dia de correr el script ##
+dolar<-120
+```
+
+```{r}
+monto_total<-tablafinal %>%
+  summarise(total=round(sum(as.numeric(tablafinal$`Importe Total`),na.rm=T)/1000000,0)) %>%
+  mutate(total_final=format(total, big.mark = "."))
+# monto_total<-tabla.para.indicadores %>%
+#   summarise(total=round(sum(as.numeric(tabla.para.indicadores$`Monto solicitado`),na.rm=T)/1000000,0)) %>%
+#   mutate(total_final=format(total, big.mark = "."))
+```
+
+### **Importe estimado de las adquisiciones.**
+```{r fila10a}
+library(flexdashboard)
+valueBox(paste("$ M ",monto_total$total_final,sep=""),
+         icon="fa-money",col="info")
+```
+
+### **Cantidad total de Procesos**
+```{r fila11a}
+library(flexdashboard)
+valueBox(nrow(tablafinal),
+         icon="fa-pencil",col="#E68BFB")
+```
+
+### **Dias promedio desde inicio del proceso y dispersión**
+```{r fila12a}
+library(flexdashboard)
+valueBox(paste(
+  "", round(median(as.numeric(tablafinal$`Días desde el inicio`), na.rm=T),0),":",
+  "",round(IQR(as.numeric(tablafinal$`Días desde el inicio`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="red")
+```
+
+### **Días promedio que un proceso no registra movimiento y dispersión**
+```{r fila13a}
+library(flexdashboard)
+valueBox(paste(
+"", round(median(as.numeric(tablafinal$`Días desde el último pase`), na.rm=T),0),":",
+"",round(IQR(as.numeric(tablafinal$`Días desde el último pase`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="#FFC300")
+```
+
+Row {data-width=40% data-height=500}
+-----------------------------------------------------------------------
+
+### 
+```{r fila21}
+library(plotly)
+library(dplyr)
+#grafico por etapas
+tabla.etapaproc<-tablafinal %>% 
+  group_by(`Estado Pliego`) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#modifico el orden del factor ubicacion
+#tabla.etapaproc$`Estado Pliego`<-factor(
+#  as.factor(tabla.etapaproc$`Estado Pliego`),
+#  levels= c("5-Proceso de adjudicación", "4-Evaluación", "3-Apertura",
+#            "2-Publicado", "1-Proceso iniciado ", "0-Sin informar"))
+
+plot_ly(as.data.frame(tabla.etapaproc), 
+        y = ~`Cantidad de expedientes`, 
+        x = ~`Estado Pliego`, 
+        type = 'bar', orientation = 'v',
+        marker = list(color = '#8B8386',
+                      line = list(color = 'rgb(205,133,63)',
+                                         width = 1.5)))%>% 
+  layout(title = "Cantidad de Procesos según etapa",
+        font=list(family = "sans serif", size = 13, color = '#000000'),
+        xaxis = list(title = ""),
+        yaxis = list(title = ""))
+```
+
+###
+```{r fila26}
+library(plotly)
+library(dplyr)
+library(RColorBrewer)
+
+#grafico por etapas
+
+library(extrafont)
+
+tabla.etapaproc<-tablafinal %>%
+  filter(`Estado Pliego`=="5-Preadjudicación" | `Estado Pliego`=="1-Inicial") %>%
+  group_by(`Estado Pliego`,`Ubicación actual`) %>%
+  summarise(`Cantidad de expedientes`=n())
+          
+## rojo oscuro #D62728 
+## violeta oscuro #9467BD
+## violeta claro #EE6AA7
+## verde  #2CA02C
+## azul #1F77B4
+## marron #8B4C39
+## naranja #FF7F0E
+## gris #8B8878
+
+#"#FF7F0E","#9467BD","#D62728","#8B4C39","#2CA02C","EE6AA7","#1F77B4"
+
+a<-ggplot(tabla.etapaproc,aes(y=`Ubicación actual`,x=`Cantidad de expedientes`,fill=`Ubicación actual`))+
+  geom_col(position = "dodge")+
+  scale_fill_manual(values=c("#FF7F0E","#8B4C39","#D62728","#9467BD","#2CA02C","#1F77B4","#EE6AA7")) +
+  #scale_fill_manual(values = col) +
+  #labs(title = "Procesos en etapa 1 y 5 según ubicación actual") +
+  geom_text(aes(label = `Cantidad de expedientes`),position=position_stack(vjust=,0.5), colour="black")+
+  theme(margin(0.25, 1, 0.25, 0.1, "cm"), legend.key.size = unit(0.25, "cm"))+   theme_minimal() +
+  theme(text=element_text(size=13,family="serif"))+
+  theme(legend.position="none") +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank())+
+  facet_wrap(~ `Estado Pliego`, nrow = 2,strip.position = "right")
+
+ggplotly(a)
+```
+
+###
+```{r fila22}
+#grafico expedientes por reparticion
+tabla.reparti<-tablafinal %>% 
+  group_by(`Ubicación actual`) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#subplot(
+plot_ly(tabla.reparti, 
+       labels = ~`Ubicación actual`, 
+       values = ~`Cantidad de expedientes`, type = 'pie',
+       textposition = 'inside',
+       textinfo = 'percent') %>% 
+  layout(title = 'Cantidad de Procesos según ubicación actual', 
+         font=list(family = "sans serif", size = 13, color = '#000000'),
+         xaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         yaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         legend = list(font = list(size = 12))) %>% 
+    layout(autosize = F, width = 420, height = 420)
+```
+
+Listado de Procesos 
+===================================== 
+
+```{r}
+library(R.utils)
+library(dplyr)
+#importo base 
+tablafinal<-loadObject("../resultados/base_tabla_reporte.Rbin") %>% 
+  ungroup()
+
+tabla_completa_bis<-tablafinal %>% 
+  select(17,1,2,3,5,10,13,15,18,19)
+
+tabla_completa_bis <- tabla_completa_bis %>% mutate_if(is.character,as.factor)
+
+#cambio el nombre a las variables por uno mas entendible
+names(tabla_completa_bis)<-c("Estado Pliego",
+                             "Secretaría",
+                             "Dirección General",
+                             "Nombre del Proceso",
+                             "Importe Total",
+                             "Expediente",
+                             "Usuario actual",
+                             "Repartición donde se encuentra",
+                             "Días desde el inicio",
+                             "Días desde el último pase")
+
+## cambio nombre a subsecretaría de gestión administrativa
+
+#tabla_completa_bis$Secretaría.y<-ifelse(tabla_completa_bis$Secretaría.y=="Subsecretaría de Gestión Administrativa","Secretaría de Gestión Administrativa",tabla_completa_bis$Secretaría.y)
+
+library(DT)
+tabla_completa_bis [,c(1,2,3,4,5,6,7,8,9,10)] %>%
+  arrange(desc(`Días desde el último pase`))%>%
+  datatable(extensions = 'Buttons', 
+            options = list(initComplete = 
+                             JS("function(settings, json){",                     "$(this.api().table().header()).css({'background-color': '#303F9F', 'color': '#fff'});",
+                                "}"),
+                           scrollY =F,
+                           dom = 'Blfrtip',
+                           buttons = c('csv', 'excel', 'pdf'),
+                           pageLength = 200, 
+                           lengthMenu = list(c(100, 200, 500, -1),
+                                             c(100, 200, 500,"Todo")),
+                           autoWidth = TRUE),
+            caption = "Se puede exportar a formatos csv, pdf y xls, conservando los filtros aplicados",
+            filter = 'top',
+            #order("Días desde el último pase"),
+            class = 'cell-border stripe',
+            callback = JS("return table;"), 
+            rownames=F,
+            escape = TRUE,
+            style = "default", width = NULL, height = NULL, elementId = NULL,
+            fillContainer = getOption("DT.fillContainer", NULL),
+            autoHideNavigation = getOption("DT.autoHideNavigation", NULL),
+            selection = c("multiple", "single", "none"), 
+            plugins = NULL, editable  = FALSE) %>%
+  formatStyle("Importe Total",'text-align'="right") 
+```
+

@@ -1,0 +1,230 @@
+"";"Estado proceso";"Estado agrupado";"Unidad Solicitante";"freq"
+"1";"Adjudicado";"Autorizada";"1";3
+"2";"Adjudicado";"Autorizada";"Área De Tesorería";2
+"3";"Adjudicado";"Autorizada";"Banco De Drogas";1
+"4";"Adjudicado";"Autorizada";"Banco De Drogas Especiales";7
+"5";"Adjudicado";"Autorizada";"Banco Nacional De Drogas Oncologicas";13
+"6";"Adjudicado";"Autorizada";"Banco Nacional De Drogas Oncologicas.";2
+"7";"Adjudicado";"Autorizada";"Banco Nacional De Drogas Oncológicas";3
+"8";"Adjudicado";"Autorizada";"Cobertura Universal De Salud - Medicamentos";7
+"9";"Adjudicado";"Autorizada";"Coordinación Banco De Drogas";4
+"10";"Adjudicado";"Autorizada";"Coordinación De Banco De Drogas";3
+"11";"Adjudicado";"Autorizada";"Coordinación De Medicamentos Esenciales";5
+"12";"Adjudicado";"Autorizada";"Coordinación De Políticas Sociambientales";1
+"13";"Adjudicado";"Autorizada";"Coordinacion De Servicios Auxiliares";2
+"14";"Adjudicado";"Autorizada";"Coordinación De Zoonosis/Dirección Nacional De Control De Enfermedades Transminsibles";2
+"15";"Adjudicado";"Autorizada";"Coordinacion Patrimonio";1
+"16";"Adjudicado";"Autorizada";"Dcei";3
+"17";"Adjudicado";"Autorizada";"Departamento De Automotores";2
+"18";"Adjudicado";"Autorizada";"Departamento De Infraestructura";2
+"19";"Adjudicado";"Autorizada";"Departamento De Patrimonio Y Bienes De Uso";1
+"20";"Adjudicado";"Autorizada";"Departamento De Servicios Auxiliares";4
+"21";"Adjudicado";"Autorizada";"Dinamia";1
+"22";"Adjudicado";"Autorizada";"Dirección De Coberturas De Alto Precio";3
+"23";"Adjudicado";"Autorizada";"Dirección De Coberturas Sanitarias Compensatorias";1
+"24";"Adjudicado";"Autorizada";"Dirección De Compras Y Contrataciones";1
+"25";"Adjudicado";"Autorizada";"Direccion De Control De  Enfermedades Inmunoprevenibles";1
+"26";"Adjudicado";"Autorizada";"Dirección De Control De Enfermedades Inmunoprevenibles";5
+"27";"Adjudicado";"Autorizada";"Direccion De Empidemiologia";1
+"28";"Adjudicado";"Autorizada";"Dirección De Epidemiologia.";1
+"29";"Adjudicado";"Autorizada";"Dirección De Epidemiología";5
+"30";"Adjudicado";"Autorizada";"Dirección De Géneros Y Diversidad";2
+"31";"Adjudicado";"Autorizada";"Direccion De Informacion Publica Y Comunicacion";1
+"32";"Adjudicado";"Autorizada";"Direccion De Maternidad, Infancia Y Adolescencia";2
+"33";"Adjudicado";"Autorizada";"Dirección De Promoción De La Salud Y Control De Enfermedades No Transmisibles";2
+"34";"Adjudicado";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";14
+"35";"Adjudicado";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis.";2
+"36";"Adjudicado";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Y Tuberculosis";2
+"37";"Adjudicado";"Autorizada";"Direccion De Salud Perinatal Y Niñez";4
+"38";"Adjudicado";"Autorizada";"Dirección De Salud Perinatal Y Niñez";10
+"39";"Adjudicado";"Autorizada";"Dirección De Salud Sexual Y Reproductiva";18
+"40";"Adjudicado";"Autorizada";"Dirección De Salud Sexual Y Reproductiva.";3
+"41";"Adjudicado";"Autorizada";"Direccion De Sangre Y Hemoderivados";1
+"42";"Adjudicado";"Autorizada";"Dirección De Sangre Y Hemoderivados";1
+"43";"Adjudicado";"Autorizada";"Direccion De Sida, Enfermedades De Transmición Sexual, Hepatitis Y Tbc";2
+"44";"Adjudicado";"Autorizada";"Dirección De Sida, Enfermedades De Transmisión Sexual, Hepatitis Y Tbc";9
+"45";"Adjudicado";"Autorizada";"Dirección De Sida, Enfermedades De Transmisión Sexual, Hepatitis Y Tbc Y  Dirección De Salud Sexual Y Reproductiva";2
+"46";"Adjudicado";"Autorizada";"Direccion De Sida, Ets, Hepatitis Y Tbc";3
+"47";"Adjudicado";"Autorizada";"Dirección De Sida, Ets, Hepatitis Y Tbc";21
+"48";"Adjudicado";"Autorizada";"Dirección De Sida, Ets, Hepatitis Y Tbc, Dirección De Salud Sexual Y Reproductiva";1
+"49";"Adjudicado";"Autorizada";"Dirección De Sida, Ets, Hep Y Tbc";4
+"50";"Adjudicado";"Autorizada";"Direccion De Sida Y Enfermedades De Transmision Sexual";8
+"51";"Adjudicado";"Autorizada";"Direccion De Sida Y Enfermedades De Transmision Sexual.";2
+"52";"Adjudicado";"Autorizada";"Dirección De Sida Y Enfermedades De Transmision Sexual";2
+"53";"Adjudicado";"Autorizada";"Dirección De Sida Y Enfermedades De Transmisión Sexual";3
+"54";"Adjudicado";"Autorizada";"Dirección De Sida Y Enfermedades De Transmisión Sexual.";4
+"55";"Adjudicado";"Autorizada";"Direccion De Sida Y Enfermedades De Trasmision Sexual";3
+"56";"Adjudicado";"Autorizada";"Dirección De Sida Y Enfermedades De Trasmisión Sexual";1
+"57";"Adjudicado";"Autorizada";"Direccion De Sida Y Ets";3
+"58";"Adjudicado";"Autorizada";"Dirección De Sida Y Ets";13
+"59";"Adjudicado";"Autorizada";"Dirección De Tecnologías De La Información Y De Las Comunicaciones";4
+"60";"Adjudicado";"Autorizada";"Dirección De Tecnología Y Soporte";3
+"61";"Adjudicado";"Autorizada";"Direcciòn General De Administración - Ms";2
+"62";"Adjudicado";"Autorizada";"Dirección General De Asuntos Jurídicos";1
+"63";"Adjudicado";"Autorizada";"Dirección General De Recursos Humanos";1
+"64";"Adjudicado";"Autorizada";"Dirección General De Tecnologías De Gestión E Innovación Tecnológica";1
+"65";"Adjudicado";"Autorizada";"Dirección Nacional De Abordaje Integral De Enfermedades No Transmisibles";2
+"66";"Adjudicado";"Autorizada";"Dirección Nacional De Capital Humano";1
+"67";"Adjudicado";"Autorizada";"Dirección Nacional De Capital Humano Y Salud Ocupacional";1
+"68";"Adjudicado";"Autorizada";"Dirección Nacional De Epidemiología E Información Estratégica";1
+"69";"Adjudicado";"Autorizada";"Dirección Nacional De Epidemiologia Y Análisis De La Situación De La Salud.";1
+"70";"Adjudicado";"Autorizada";"Direccion Nacional De Epidemiologia Y Analisis De La Situacion De Salud";1
+"71";"Adjudicado";"Autorizada";"Direccion Nacional De Epidemiologia Y Analisis De La Situacion De Salud.";1
+"72";"Adjudicado";"Autorizada";"Dirección Nacional De Epidemiología Y Análisis De La Situación De Salud";11
+"73";"Adjudicado";"Autorizada";"Dirección Nacional De Epidemiología Y Análisis De Situación De Salud";1
+"74";"Adjudicado";"Autorizada";"Dirección Nacional De Epidemología Y Análisis De La Situación De Salud";1
+"75";"Adjudicado";"Autorizada";"Dirección Nacional De Habilitación, Fiscalización Y Sanidad De Fronteras";1
+"76";"Adjudicado";"Autorizada";"Direccion Nacional De Maternidad, Infancia Y Adolescencia";2
+"77";"Adjudicado";"Autorizada";"Direccion Nacional De Maternidad, Infancia Y Adolescencia.";5
+"78";"Adjudicado";"Autorizada";"Dirección Nacional De Maternidad Infancia Y Adolescencia";1
+"79";"Adjudicado";"Autorizada";"Dirección Nacional De Maternidad, Infancia Y Adolescencia";31
+"80";"Adjudicado";"Autorizada";"Dirección Nacional De Maternidad, Infancia Y Adolescencia.";2
+"81";"Adjudicado";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitaria";1
+"82";"Adjudicado";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitarias";2
+"83";"Adjudicado";"Autorizada";"Dirección Nacional De Registro, Fiscalización Y Sanidad De Fronteras";2
+"84";"Adjudicado";"Autorizada";"Dirección Nacional De Salud Bucodental";1
+"85";"Adjudicado";"Autorizada";"Dirección Nacional De Salud Sexual Y Reproductiva";10
+"86";"Adjudicado";"Autorizada";"Direccion Nac. Maternidad Infancia Y Adolescencia";6
+"87";"Adjudicado";"Autorizada";"Dsetshyt";4
+"88";"Adjudicado";"Autorizada";"Incucai";17
+"89";"Adjudicado";"Autorizada";"Instituto Nacional Central Único Coordinador De Ablación E Implante";1
+"90";"Adjudicado";"Autorizada";"Instituto Nacional Central Único Coordinador De Ablación E Implante.";1
+"91";"Adjudicado";"Autorizada";"Instituto Nacional Central Único Coordinador De Ablación E Implante (Incucai)";2
+"92";"Adjudicado";"Autorizada";"Instituto Nacional Centro Unico Coordinador De Ablacion E Implante -Incucai.";1
+"93";"Adjudicado";"Autorizada";"Instituto Nacional Del Cáncer";1
+"94";"Adjudicado";"Autorizada";"Ministerio De Salud De La Nacion";2
+"95";"Adjudicado";"Autorizada";"Prog 25 - Programa Nacional De Salud Sexual Y Procreación Responsable";3
+"96";"Adjudicado";"Autorizada";"Programa De La Alimentación Saludable Y Prevención De La Obesidad";2
+"97";"Adjudicado";"Autorizada";"Programa Naciona De Enfermedades Poco Frecuentes Y Anomalías Congénitas.";1
+"98";"Adjudicado";"Autorizada";"Programa Nacional De Atención Al Paciente Miastenico";1
+"99";"Adjudicado";"Autorizada";"Programa Nacional De Atención Al Paciente Miasténico";2
+"100";"Adjudicado";"Autorizada";"Programa Nacional De Control De Tabaco";2
+"101";"Adjudicado";"Autorizada";"Programa Nacional De Prevención Y Control De Las Enfermedades Respiratorias Crónicas";6
+"102";"Adjudicado";"Autorizada";"Programa Nacional De Reproducción Médicamente Asistida";1
+"103";"Adjudicado";"Autorizada";"Programa Nacional De Salud Ocular Y Prevención De La Ceguera";2
+"104";"Adjudicado";"Autorizada";"Programa Nacional De Salud Sexual Y Procreacion Responsable";2
+"105";"Adjudicado";"Autorizada";"Programa Nacional De Salud Sexual Y Procreacion Responsable (Prg. 25)";3
+"106";"Adjudicado";"Autorizada";"Programa Nacional De Salud Sexual Y Procreación Responsable (Prg. 25)";2
+"107";"Adjudicado";"Autorizada";"Programa Nacional De Salud Sexual Y Procreacion Responsable (Prg. 25 - 41)";1
+"108";"Adjudicado";"Autorizada";"Programa Nacional De Salud Sexual Y Procreacion Responsable (Prg. 25-41)";2
+"109";"Adjudicado";"Autorizada";"Programa Nacional De Tenencia  Responsable Y Sanidad De Perros Y Gatos";1
+"110";"Adjudicado";"Autorizada";"Programa Nacional De Tenencia Responsable Y Sanidad De Perros Y Gatos";6
+"111";"Adjudicado";"Autorizada";"Programa Nacional De Tenencia Responsable Y Sanidad De Perros Y Gatos / Dirección De Epidemiología";2
+"112";"Adjudicado";"Autorizada";"Programa Remediar";2
+"113";"Adjudicado";"Autorizada";"Secretaría De Calidad En Salud";1
+"114";"Adjudicado";"Autorizada";"Secretaria De Calidad En Salud Y Subsecretaria De Gestion De Servicios E Institutos";1
+"115";"Adjudicado";"Autorizada";"Secretaria De Coberturas Y Recursos De Salud";3
+"116";"Adjudicado";"Autorizada";"Subsecretaría De Articulación Federal";2
+"117";"Adjudicado";"Autorizada";"Subsecretaria De Coordinacion Administrativa";1
+"118";"Adjudicado";"Pendiente";"Direccion De Sida Y Enfermedades De Transmision Sexual";1
+"119";"Dejado Sin Efecto";"Autorizada";"Departamento De Servicios Auxiliares";1
+"120";"Dejado Sin Efecto";"Autorizada";"Direccion De Empidemiologia";1
+"121";"Dejado Sin Efecto";"Autorizada";"Dirección De Sida Y Enfermedades De Transmisión Sexual";1
+"122";"Dejado Sin Efecto";"Autorizada";"Direccion Nac. Maternidad Infancia Y Adolescencia";2
+"123";"Dejado Sin Efecto";"Autorizada";"Dncet - Coordinación De Zoonosis";2
+"124";"Dejado Sin Efecto";"Autorizada";"Imprenta Central Dr. Ramón Carillo";2
+"125";"Desierto";"Autorizada";"Banco De Drogas Especiales";1
+"126";"Desierto";"Autorizada";"Coordinación Banco De Drogas";1
+"127";"Desierto";"Autorizada";"Coordinación De Políticas Sociambientales";2
+"128";"Desierto";"Autorizada";"Delegaciones Sanitarias Federales";1
+"129";"Desierto";"Autorizada";"Dirección Coberturas De Alto Precio";2
+"130";"Desierto";"Autorizada";"Dirección De Coberturas De Alto Precio";1
+"131";"Desierto";"Autorizada";"Dirección De Control De Enfermedades Transmitidas Por Vectores";2
+"132";"Desierto";"Autorizada";"Direccion De Informacion Publica Y Comunicacion";1
+"133";"Desierto";"Autorizada";"Direccion De Maternidad, Infancia Y Adolescencia";2
+"134";"Desierto";"Autorizada";"Dirección De Salud Perinatal Y Niñez";2
+"135";"Desierto";"Autorizada";"Dirección De Salud Sexual Y Reproductiva";1
+"136";"Desierto";"Autorizada";"Dirección De Sida, Enfermedades De Transmisión Sexual, Hepatitis Y Tbc";1
+"137";"Desierto";"Autorizada";"Direccion De Sida, Ets, Hepatitis Y Tbc";2
+"138";"Desierto";"Autorizada";"Dirección De Sida Y Enfermedades De Trasmisión Sexual";2
+"139";"Desierto";"Autorizada";"Direccion De Sida Y Ets";1
+"140";"Desierto";"Autorizada";"Dirección Nacional De Determinantes De La Salud E Investigación.";1
+"141";"Desierto";"Autorizada";"Dirección Nacional De Epidemiología Y Análisis De La Situación De Salud";4
+"142";"Desierto";"Autorizada";"Direccion Nacional De Integracion Sanitaria Federal";1
+"143";"Desierto";"Autorizada";"Dirección Nacional De Maternidad, Infancia Y Adolescencia";5
+"144";"Desierto";"Autorizada";"Dirección Nacional De Salud Sexual Y Reproductiva";8
+"145";"Desierto";"Autorizada";"Direccion Nacional De Sistemas De Informacion En Salud";2
+"146";"Desierto";"Autorizada";"Direccion Nac. Maternidad Infancia Y Adolescencia";2
+"147";"Desierto";"Autorizada";"Dncet - Coordinación De Zoonosis";3
+"148";"Desierto";"Autorizada";"Dsetshyt";4
+"149";"Desierto";"Autorizada";"Imprenta Central Dr. Ramón Carillo";1
+"150";"Desierto";"Autorizada";"Incucai";2
+"151";"Desierto";"Autorizada";"Instituto Nacional Del Cáncer";1
+"152";"Desierto";"Autorizada";"Programa Nacional De Atención Al Paciente Miastenico";2
+"153";"Desierto";"Autorizada";"Programa Nacional De Atención Al Paciente Miasténico";2
+"154";"Desierto";"Pendiente";"Dirección Nacional De Salud Bucodental";2
+"155";"Disponible Para Adjudicar";"Autorizada";"Coordinacion De Reproduccion Medicamente Asistida";1
+"156";"Disponible Para Adjudicar";"Autorizada";"Departamento De Servicios Auxiliares";3
+"157";"Disponible Para Adjudicar";"Autorizada";"Dirección De Cobertura Sanitaria Compensatoria";1
+"158";"Disponible Para Adjudicar";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";9
+"159";"Disponible Para Adjudicar";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis Y Dirección De Control De Enfermedades Transmitidas Por Vectores.";2
+"160";"Disponible Para Adjudicar";"Autorizada";"Dirección De Salud Perinatal Y Niñez";2
+"161";"Disponible Para Adjudicar";"Autorizada";"Dirección General De Proyectos Con Financiamiento Externo";1
+"162";"Disponible Para Adjudicar";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitaria";1
+"163";"Disponible Para Adjudicar";"Autorizada";"Programa Nacional De Tenencia Responsable Y Sanidad De Perros Y Gatos";1
+"164";"Disponible Para Adjudicar";"Autorizada";"Servicio De Mantenimiento Integral, Preventivo Y Correctivo De Grupos Electrógenos.";2
+"165";"En Apertura";"Autorizada";"Banco Nacional De Drogas Oncologicas";1
+"166";"En Apertura";"Autorizada";"Departamento De Servicios Auxiliares";2
+"167";"En Apertura";"Autorizada";"Dgpfe#Ms";1
+"168";"En Apertura";"Autorizada";"Dicei";6
+"169";"En Apertura";"Autorizada";"Dirección Coberturas De Alto Precio";2
+"170";"En Apertura";"Autorizada";"Direccion De Compras Y Contrataciones";60
+"171";"En Apertura";"Autorizada";"Dirección De Control De Enfermedades Inmunoprevenibles";3
+"172";"En Apertura";"Autorizada";"Dirección De Control De Enfermedades Transmitidas Por Vectores";2
+"173";"En Apertura";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";2
+"174";"En Apertura";"Autorizada";"Dirección De Salud Perinatal Y Niñez";2
+"175";"En Apertura";"Autorizada";"Dirección De Sangre Y Hemoderivados";1
+"176";"En Apertura";"Autorizada";"Dirección General De Administracion - Ms";2
+"177";"En Apertura";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitaria";2
+"178";"En Apertura";"Autorizada";"Direccion Nacional De Sistemas De Informacion En Salud";1
+"179";"En Apertura";"Autorizada";"Dncet-Cz";1
+"180";"En Apertura";"Autorizada";"Secretaría De Calidad En Salud";1
+"181";"En Apertura";"Autorizada";"Subsecretaría De Calidad, Regulación Y Fiscalización";1
+"182";"En Apertura";"Autorizada";"Subsecretaria E Gestión Administrativa";1
+"183";"En Apertura";"Autorizada";"Unidades Sanitarias Móviles.";1
+"184";"En Apertura";"Pendiente";"Programa Nacional De Enfermedades Poco Frecuentes Y Anomalías Congénitas.";1
+"185";"En Evaluacion";"Autorizada";"Departamento De Servicios Auxiliares";3
+"186";"En Evaluacion";"Autorizada";"Dirección De Acciones Territoriales";1
+"187";"En Evaluacion";"Autorizada";"Dirección De Cobertura Sanitaria Compensatoria";2
+"188";"En Evaluacion";"Autorizada";"Dirección De Control De Enfermedades Transmitidas Por Vectores";2
+"189";"En Evaluacion";"Autorizada";"Dirección De Medicina Transfusional";2
+"190";"En Evaluacion";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";6
+"191";"En Evaluacion";"Autorizada";"Dirección General De Administración";2
+"192";"En Evaluacion";"Autorizada";"Direccion Nacional De Determinantes De La Salud E Investigacion.";1
+"193";"En Evaluacion";"Autorizada";"Dirección Nacional De Epidemiologia Y Análisis De La Situación De La Salud.";1
+"194";"En Evaluacion";"Autorizada";"Dirección Nacional De Salud Sexual Y Reproductiva";2
+"195";"En Evaluacion";"Autorizada";"Incucai";2
+"196";"En Evaluacion";"Autorizada";"Programa Equipos De Abordaje Territorial";1
+"197";"En Evaluacion";"Autorizada";"Secretaría De Políticas, Regulación E Institutos";1
+"198";"Fracasado";"Autorizada";"Departamento De Servicios Auxiliares";2
+"199";"Fracasado";"Autorizada";"Dirección De Medicina Transfusional";2
+"200";"Fracasado";"Autorizada";"Dirección De Salud Perinatal Y Niñez";4
+"201";"Fracasado";"Autorizada";"Dirección General De Asuntos Juridicos";1
+"202";"Fracasado";"Autorizada";"Jardín Maternal La Casita Del Sol Ii";1
+"203";"Fracasado";"Autorizada";"Programa Nacional Para La Detección Y Control De Enfermedad Celíaca";2
+"204";"Fracasado";"Pendiente";"Departamento De Servicios Auxiliares.";2
+"205";"Ingresado";"Autorizada";"80/12";1
+"206";"Ingresado";"Autorizada";"Coordinación General De Delegaciones Sanitarias Federales.";1
+"207";"Ingresado";"Autorizada";"Direccion De Comunicacion Institucional";2
+"208";"Ingresado";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";4
+"209";"Ingresado";"Autorizada";"Direccion De Salud Perinatal Y Niñez";2
+"210";"Ingresado";"Autorizada";"Dirección De Tecnologías De La Información Y De Las Comunicaciones";2
+"211";"Ingresado";"Autorizada";"Dirección Nacional De Determinantes De La Salud E Investigación.";1
+"212";"Ingresado";"Autorizada";"Dirección Nacional De Emergencias Sanitarias";4
+"213";"Ingresado";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitaria";4
+"214";"Ingresado";"Autorizada";"Dirección Nacional De Salud Sexual Y Reproductiva";2
+"215";"Ingresado";"Autorizada";"Ministerio De Salud De La Nacion";1
+"216";"Ingresado";"Autorizada";"Programa Nacional De Detección Y Control De La Enfermedad Celíaca";2
+"217";"Ingresado";"Autorizada";"Programa Nacional De Tenencia Responsable Y Sanidad De Perros Y Gatos";10
+"218";"Ingresado";"Autorizada";"Servicio";2
+"219";"Pendiente Adjudicaci?n";"Autorizada";"Dgpfe#Ms";1
+"220";"Pendiente Análisis";"Autorizada";"Dirección De Respuesta Al Vih, Its, Hepatitis Virales Y Tuberculosis";2
+"221";"Pendiente Análisis";"Autorizada";"Dirección General De Proyectos Con Financiamiento Externo";1
+"222";"Pendiente Autorizar Ordenes Compra";"Autorizada";"Incucai";3
+"223";"Preadjudicado";"Autorizada";"Dirección Nacional De Salud Bucodental";1
+"224";"Publicado";"Autorizada";"Dgpfe#Ms";2
+"225";"Publicado";"Autorizada";"Dirección De Géneros Y Diversidad";1
+"226";"Publicado";"Autorizada";"Dirección Nacional De Emergencias Sanitarias";2
+"227";"Publicado";"Autorizada";"Dirección Nacional De Medicamentos Y Tecnología Sanitaria";2
+"228";"Publicado";"Autorizada";"Dirección Nacional De Salud Sexual Y Reproductiva";2
+"229";NA;NA;NA;206

@@ -1,0 +1,456 @@
+---
+title: "**SGA - Tablero de Adquisiciones**"
+output: 
+  flexdashboard::flex_dashboard:
+        vertical_layout: scroll
+        orientation: rows
+        #theme: cerulean
+        theme: lumen
+        favicon: logo_sga_rojo.png
+        logo: logoMSAL35pctn.png
+---
+
+```{r echo=F, warning=FALSE, message=FALSE}
+#E)Traigo la tabla final
+library(R.utils)
+#importo base SCO
+tablafinalEP<-loadObject("../resultados/base_tabladinamicaEP.Rbin")
+#importo base TRATAMIENTOS
+tabla.tramitaciones.doc<-loadObject("../resultados/tabla.tramitaciones.doc.Rbin")
+library(dplyr)
+tabla.para.indicadores1<-tablafinalEP %>% 
+  select(`Estado Pliego`,`reparticion.actual.agrup`,
+         `Días desde autorización`, dias_ultimo_pase,MontoSolic)
+tabla.tramitaciones.doc$MontoSolic<-0
+tabla.para.indicadores2<-tabla.tramitaciones.doc %>% 
+  select(`Etapa del proceso`, `Repartición actual`,
+         `Dias desde el inicio`, `Días desde el último pase`,MontoSolic)
+
+nombres<-c("Etapa del proceso", "reparticion.actual.agrup", 
+           "Dias desde el inicio", "Días desde el último pase","Monto solicitado")
+names(tabla.para.indicadores1)<-nombres
+names(tabla.para.indicadores2)<-nombres
+tabla.para.indicadores<-rbind(tabla.para.indicadores1, tabla.para.indicadores2)
+```
+
+```{r}
+# para unir tabla programas y hacer todo en una tabla ##
+tablafinalEP$Acrónimo <-"Sin dato"
+tabla.tramitaciones.doc$Secretaría<-"Sin dato"
+tabla.tramitaciones.doc$`Programa Descripción`<-"Sin dato"
+tabla.tramitaciones.doc$`Nro. Pliego`<-"Sin dato"
+tabla.tramitaciones.doc$MontoSolic<-"Sin dato"
+
+tabla.tramitaciones.doc <- tabla.tramitaciones.doc %>% 
+  select(1,2,3,4,7,6,8,9,11,12,13,10)
+
+tabla_final_2<-tablafinalEP [,c("Estado Pliego","Acrónimo","Nombre pliego","NumExpediente","repartición actual","Usuario actual", "Días desde la creación del proceso","dias_ultimo_pase", "Secretaría","Descripción Detallada","Nro. Pliego","MontoSolic")] 
+names(tabla_final_2)<-names(tabla.tramitaciones.doc)
+
+## une comprar con financiemiento internacional 
+tabla_completa<-rbind(tabla.tramitaciones.doc,tabla_final_2)
+
+#cambio el nombre a las variables por uno mas entendible
+names(tabla_completa)<-c("Estado Pliego",
+                         "Acrónimo", 
+                         "Nombre del proceso",
+                         "Expediente",
+                         "Repartición donde se encuentra",
+                         "Usuario actual",
+                         "Días desde el inicio",
+                         "Días desde el último pase",
+                         "Secretaría",
+                         "Descripción del Programa",
+                         "Nro. Pliego",
+                         "Monto solicitado")
+```
+Indicadores 
+===================================== 
+
+Row {.sidenav data-height=180, data-width=150}
+-----------------------------------------------------------------------
+
+<!-- ### **Adquisiciones en curso desde el momento en que se genera el expediente hasta el perfeccionamiento contractual, para todas las modalidades de compra y fuentes de financiamiento** -->
+<!-- ```{r fila8a} -->
+<!-- ##A)Seleccion de variables  -->
+<!-- library(flexdashboard) -->
+<!-- valueBox("",#value = shiny::tags$p("Incluye", style = "font-size: 4px;"), -->
+<!--          icon="fa-comments", col="#1F77DC")#303F9F")  -->
+<!-- ``` -->
+
+
+```{r}
+library(readxl)
+library(tidyverse)
+fowmc<-read_excel("../bases/Form_FOWMC.xlsx")
+fowmc$`Importe Total` <- format(fowmc$`Importe Total`, scientific = F)
+fowmc$`Importe Total`<- gsub(" ", "",fowmc$`Importe Total`)
+fowmc$`Importe Total`<- str_sub(fowmc$`Importe Total`,1,nchar(fowmc$`Importe Total`)-3)
+fowmc$`Importe Total`<-as.numeric(fowmc$`Importe Total`)
+
+### traigo TC al dia de correr el script ##
+
+dolar<-110.25
+
+### reemplazamos texto por NA, esto en próximas versiones será necesario
+
+fowmc$Dirección<-ifelse(fowmc$Dirección=="N/A",
+                        NA,fowmc$Dirección)
+fowmc$Dirección<-ifelse(fowmc$Dirección=="S/D",
+                        NA,fowmc$Dirección)
+
+fowmc$`Dirección General`<-ifelse(fowmc$`Dirección General`=="N/A",
+                                  NA,fowmc$`Dirección General`)
+fowmc$`Dirección General`<-ifelse(fowmc$`Dirección General`=="S/D",
+                                  NA,fowmc$`Dirección General`)
+
+fowmc$Secretaria<-ifelse(fowmc$Secretaría=="N/A",
+                         NA,fowmc$Secretaría)
+fowmc$Secretaria<-ifelse(fowmc$Secretaría=="S/D",
+                         NA,fowmc$Secretaría)
+
+fowmc$Subsecretaria<-ifelse(fowmc$Subsecretaria=="N/A",
+                            NA,fowmc$Subsecretaria)
+fowmc$Subsecretaria<-ifelse(fowmc$Subsecretaria=="S/D",
+                            NA,fowmc$Subsecretaria)
+
+### armo importe porque hay moneda usd y $ ###
+
+fowmc<-fowmc %>%
+  rename(Expediente=`Número de expediente`)%>%
+  select(4,10,13,14) %>%
+  #select(4,5,6,7,10,13,14) %>%
+  mutate(Expediente=str_replace(Expediente," ","")) %>% 
+  mutate(`Importe Total`=round(`Importe Total`)) %>%
+  mutate(importe_final=ifelse(`Importe total moneda`=="USD",`Importe Total`*dolar,`Importe Total`)) %>%
+  mutate(importe_final=round(importe_final)) %>%
+  distinct()
+
+#filter(!is.na(c(Expediente))) %>% ## necesito filtrar si es nulo en todas las variables o nulo a lo largo de todas las filas
+#mutate(Dirección_Final=coalesce(Dirección,`Dirección General`,Subsecretaria, Secretaría))
+
+## joineo tabla_completa vs FOWMC, por ahora queda igual, solo traemos montos nuevos que vienen de FOWMC ####
+
+fowmc<- fowmc %>% 
+  group_by(Expediente) %>% 
+  slice_max(importe_final) %>% 
+  ungroup()
+```
+
+
+```{r}
+monto_total<-fowmc %>%
+  summarise(total=round(sum(as.numeric(fowmc$importe_final),na.rm=T)/1000000,0)) %>%
+  mutate(total_final=format(total, big.mark = "."))
+view(monto_total)
+# monto_total<-tabla.para.indicadores %>%
+#   summarise(total=round(sum(as.numeric(tabla.para.indicadores$`Monto solicitado`),na.rm=T)/1000000,0)) %>%
+#   mutate(total_final=format(total, big.mark = "."))
+```
+
+### **Importe estimado de las adquisiciones.**
+```{r fila10a}
+library(flexdashboard)
+valueBox(paste("$ M ",monto_total$total_final,sep=""),
+         icon="fa-money",col="info")
+```
+
+### **Cantidad total de Procesos**
+```{r fila11a}
+library(flexdashboard)
+valueBox(nrow(tabla.para.indicadores),
+         icon="fa-pencil",col="#E68BFB")
+```
+
+### **Dias promedio desde inicio del proceso y dispersión**
+```{r fila12a}
+library(flexdashboard)
+valueBox(paste(
+"", round(median(as.numeric(tabla.para.indicadores$`Dias desde el inicio`), na.rm=T),0),":",
+"",round(IQR(as.numeric(tabla.para.indicadores$`Dias desde el inicio`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="red")
+```
+
+### **Días promedio que un proceso no registra movimiento y dispersión**
+```{r fila13a}
+library(flexdashboard)
+valueBox(paste(
+"", round(median(as.numeric(tabla.para.indicadores$`Días desde el último pase`), na.rm=T),0),":",
+"",round(IQR(as.numeric(tabla.para.indicadores$`Días desde el último pase`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$dias_ultimo_pase), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="#FFC300")
+```
+
+Row {data-width=40% data-height=500}
+-----------------------------------------------------------------------
+
+### 
+```{r fila21}
+library(plotly)
+library(dplyr)
+#grafico por etapas
+tabla.etapaproc<-tabla.para.indicadores %>% 
+  group_by(`Etapa del proceso`) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#modifico el orden del factor ubicacion
+#tabla.etapaproc$`Estado Pliego`<-factor(
+#  as.factor(tabla.etapaproc$`Estado Pliego`),
+#  levels= c("5-Proceso de adjudicación", "4-Evaluación", "3-Apertura",
+#            "2-Publicado", "1-Proceso iniciado ", "0-Sin informar"))
+
+plot_ly(as.data.frame(tabla.etapaproc), 
+        y = ~`Cantidad de expedientes`, 
+        x = ~`Etapa del proceso`, 
+        type = 'bar', orientation = 'v',
+        marker = list(color = '#b52a0c',
+                      line = list(color = 'rgb(8,48,107)',
+                                         width = 1.5)))%>% 
+  layout(title = "Cantidad de Procesos según etapa",
+        font=list(family = "sans serif", size = 13, color = '#000000'),
+        xaxis = list(title = ""),
+        yaxis = list(title = ""))
+#%>% 
+#    layout(autosize = F, width = 700, height = 520)
+#,
+
+```
+###
+```{r fila26}
+library(plotly)
+library(dplyr)
+library(RColorBrewer)
+
+#grafico por etapas
+
+library(extrafont)
+
+tabla.etapaproc<-tabla.para.indicadores %>%
+filter(`Etapa del proceso`=="5-Preadjudicación" | `Etapa del proceso`=="1-Inicial") %>%
+    group_by(`Etapa del proceso`,reparticion.actual.agrup) %>%
+  summarise(`Cantidad de expedientes`=n())
+
+col <- c("#FF7F0E","#9467BD","#D62728","#8C564B",
+         "#2CA02C","#1F77B4","#bcbd22","#e377c2","#FFD700")
+# 
+# col <- c("#FF7F0E","#E377C2","#D62728","#8C564B","#2CA02C",
+#          "#7F7F7F","#1F77B4","#BCBD22","#9467BD")
+
+#col <- c("#1F77B4","#9467BD","#D62728","#E377C2",
+#         "#2CA02C","#FF7F0E","#9467BD","#BCBD22","#7F7F7F")
+
+a<-ggplot(tabla.etapaproc,aes(y=reparticion.actual.agrup,x=`Cantidad de expedientes`,fill=reparticion.actual.agrup))+
+  geom_col(position = "dodge")+
+  scale_fill_manual(values = col) +
+  #labs(title = "Procesos en etapa 1 y 5 según ubicación actual") +
+  geom_text(aes(label = `Cantidad de expedientes`),position=position_stack(vjust=,0.5), colour="black")+
+  theme(margin(0.25, 1, 0.25, 0.1, "cm"), legend.key.size = unit(0.25, "cm"))+   theme_minimal() +
+  theme(text=element_text(size=13,family="serif"))+
+  theme(legend.position="none") +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank())+
+  facet_wrap(~ `Etapa del proceso`, nrow = 2,strip.position = "right")
+
+ggplotly(a)
+#    
+
+# ggplot(tabla.etapaproc,aes(y=reparticion.actual.agrup,x=`Cantidad de expedientes`,fill=reparticion.actual.agrup))+
+#   geom_col(position = "dodge")+
+#   scale_fill_manual(values=brewer.pal(n = 7, name = "Accent"))+ 
+#   geom_text(aes(label = `Cantidad de expedientes`),position=position_stack(vjust=,0.5), colour="black")+
+#   #coord_flip() +
+#   #theme(legend.position = "none")+
+#   #theme(axis.text.x= element_text(angle = 90)) +
+#   theme(margin(0.25, 1, 0.25, 0.1, "cm"), legend.key.size = unit(0.25, "cm"))+ 
+#   labs(title = "Cantidad procesos según repartición actual")+
+#   theme_minimal() +
+#   theme(axis.title.y = element_blank(),
+#   axis.title.x = element_blank())+
+#   facet_wrap(~ `Etapa del proceso`, nrow = 2)
+# 
+
+# p<-ggplot(tabla.etapaproc,aes(x=reparticion.actual.agrup,y=`Cantidad de expedientes`, fill=reparticion.actual.agrup,show.legend = FALSE))  +
+#   geom_col() +
+#   scale_fill_manual(values=brewer.pal(n = 8, name = "Accent"))+ 
+#   theme_minimal() +
+#   theme_bw() +
+#   theme(legend.position = "none")+
+#   theme(axis.text.x= element_text(angle = 90)) +
+#   facet_wrap(vars(`Etapa del proceso`)) +
+#   theme(plot.margin = margin(0.25, 1, 0.25, 0.1, "cm"), legend.key.size = unit(0.25, "cm"), 
+#         legend.direction = "horizontal")+
+#   labs(title = "Cantidad procesos en Iniical y Preadjudicación")
+# 
+# fig <- ggplotly(p)
+# fig
+
+
+# tabla.etapaproc %>%
+#   plot_ly(x = ~`Etapa del proceso`, y =~`Cantidad de expedientes`, color = ~reparticion.actual.agrup) %>%
+#   add_bars() %>%
+#   layout(barmode = "stack") %>%
+#   layout(title = "N procesos en etapa inicial y preadjudicación según ubicación",
+#          font=list(family = "sans serif", size = 13),
+#          xaxis = list(title = ""),
+#          yaxis = list(title = ""),
+#        legend = list(font = list(size = 12))) %>%
+#   layout(autosize = F, width = 410, height = 410)
+
+# tabla.etapaproc %>%
+# plot_ly(x = ~`Etapa del proceso`, y =~`Cantidad de expedientes`, color = ~reparticion.actual.agrup) %>%
+# add_bars() %>%
+#   layout(barmode = "stack") %>%
+#   layout(title = "N procesos en etapa inicial y preadjudicación según ubicación",
+#          font=list(family = "sans serif", size = 13),
+#          xaxis = list(title = ""),
+#          yaxis = list(title = ""))
+```
+
+###
+```{r fila22}
+#grafico expedientes por reparticion
+tabla.reparti<-tabla.para.indicadores %>% 
+  group_by(reparticion.actual.agrup) %>% 
+  summarise(`Cantidad de expedientes`=n())
+
+#subplot(
+plot_ly(tabla.reparti, 
+       labels = ~`reparticion.actual.agrup`, 
+       values = ~`Cantidad de expedientes`, type = 'pie',
+       textposition = 'inside',
+       textinfo = 'percent') %>% 
+  layout(title = 'Cantidad de Procesos según ubicación actual', 
+         font=list(family = "sans serif", size = 13, color = '#000000'),
+         xaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         yaxis = list(showgrid = F, zeroline = F, showticklabels = F),
+         legend = list(font = list(size = 12))) %>% 
+    layout(autosize = F, width = 420, height = 420)
+
+```
+
+```{r}
+tabla_completa$`Monto solicitado` <- as.numeric(tabla_completa$`Monto solicitado`)
+# tabla_completa$`Monto solicitado` <- format(tabla_completa$`Monto solicitado`, big.mark = ".")
+tabla_completa$`Monto solicitado` <- ifelse(gsub(" ","",tabla_completa$`Monto solicitado`)=="NA","",tabla_completa$`Monto solicitado`)
+```
+
+#### PARA TRAER FORMULARIO FOWMC #####
+
+```{r}
+#E)Traigo formualrio fowmc
+library(readxl)
+library(tidyverse)
+fowmc<-read_excel("../bases/Form_FOWMC.xlsx")
+fowmc$`Importe Total` <- format(fowmc$`Importe Total`, scientific = F)
+fowmc$`Importe Total`<- gsub(" ", "",fowmc$`Importe Total`)
+fowmc$`Importe Total`<- str_sub(fowmc$`Importe Total`,1,nchar(fowmc$`Importe Total`)-3)
+fowmc$`Importe Total`<-as.numeric(fowmc$`Importe Total`)
+
+### traigo TC al dia de correr el script ##
+
+dolar<-110.25
+
+### reemplazamos texto por NA, esto en próximas versiones será necesario
+
+fowmc$Dirección<-ifelse(fowmc$Dirección=="N/A",
+                                     NA,fowmc$Dirección)
+fowmc$Dirección<-ifelse(fowmc$Dirección=="S/D",
+                                     NA,fowmc$Dirección)
+
+fowmc$`Dirección General`<-ifelse(fowmc$`Dirección General`=="N/A",
+                                               NA,fowmc$`Dirección General`)
+fowmc$`Dirección General`<-ifelse(fowmc$`Dirección General`=="S/D",
+                                               NA,fowmc$`Dirección General`)
+
+fowmc$Secretaria<-ifelse(fowmc$Secretaría=="N/A",
+                                      NA,fowmc$Secretaría)
+fowmc$Secretaria<-ifelse(fowmc$Secretaría=="S/D",
+                                      NA,fowmc$Secretaría)
+
+fowmc$Subsecretaria<-ifelse(fowmc$Subsecretaria=="N/A",
+                                         NA,fowmc$Subsecretaria)
+fowmc$Subsecretaria<-ifelse(fowmc$Subsecretaria=="S/D",
+                                         NA,fowmc$Subsecretaria)
+
+### armo importe porque hay moneda usd y $ ###
+
+fowmc<-fowmc %>%
+  rename(Expediente=`Número de expediente`)%>%
+  select(4,10,13,14) %>%
+  #select(4,5,6,7,10,13,14) %>%
+  mutate(Expediente=str_replace(Expediente," ","")) %>% 
+  mutate(`Importe Total`=round(`Importe Total`)) %>%
+  mutate(importe_final=ifelse(`Importe total moneda`=="USD",`Importe Total`*dolar,`Importe Total`)) %>%
+  mutate(importe_final=round(importe_final)) %>%
+  distinct()
+  #filter(!is.na(c(Expediente))) %>% ## necesito filtrar si es nulo en todas las variables o nulo a lo largo de todas las filas
+  #mutate(Dirección_Final=coalesce(Dirección,`Dirección General`,Subsecretaria, Secretaría))
+
+## joineo tabla_completa vs FOWMC, por ahora queda igual, solo traemos montos nuevos que vienen de FOWMC ####
+
+fowmc<- fowmc %>% 
+  group_by(Expediente) %>% 
+  slice_max(importe_final)
+
+tabla_completa_bis<- tabla_completa %>% 
+  left_join(fowmc, by=c("Expediente")) %>%
+  mutate(`Monto solicitado`=ifelse
+         (is.na(`Monto solicitado`),
+           importe_final,`Monto solicitado`)) %>% 
+  select(1,3,4,5,6,7,8,11,12) %>% 
+  distinct()
+```
+
+Listado de Procesos 
+===================================== 
+
+```{r}
+#cambio el nombre a las variables por uno mas entendible
+names(tabla_completa_bis)<-c("Estado Pliego",
+                         "Nombre del proceso",
+                         "Expediente",
+                         "Repartición donde se encuentra",
+                         "Usuario actual",
+                         "Días desde el inicio",
+                         "Días desde el último pase",
+                         "Nro. Pliego",
+                         "Monto solicitado")
+
+## cambio nombre a subsecretaría de gestión administrativa
+
+#tabla_completa_bis$Secretaría.y<-ifelse(tabla_completa_bis$Secretaría.y=="Subsecretaría de Gestión Administrativa","Secretaría de Gestión Administrativa",tabla_completa_bis$Secretaría.y)
+
+library(DT)
+tabla_completa_bis [,c(1,2,8,9,3,4,5,6,7)] %>%
+  arrange(desc(`Días desde el último pase`))%>%
+  datatable(extensions = 'Buttons', 
+            options = list(initComplete = 
+                             JS("function(settings, json){",                     "$(this.api().table().header()).css({'background-color': '#303F9F', 'color': '#fff'});",
+                                "}"),
+                           scrollY =F,
+                           dom = 'Blfrtip',
+                           buttons = c('csv', 'excel', 'pdf'),
+                           pageLength = 200, 
+                           lengthMenu = list(c(100, 200, 500, -1),
+                                             c(100, 200, 500,"Todo")),
+                           autoWidth = TRUE),
+            caption = "Se puede exportar a formatos csv, pdf y xls, conservando los filtros aplicados",
+            filter = 'top',
+            #order("Días desde el último pase"),
+            class = 'cell-border stripe',
+            callback = JS("return table;"), 
+            rownames=F,
+            escape = TRUE,
+            style = "default", width = NULL, height = NULL, elementId = NULL,
+            fillContainer = getOption("DT.fillContainer", NULL),
+            autoHideNavigation = getOption("DT.autoHideNavigation", NULL),
+            selection = c("multiple", "single", "none"), 
+            plugins = NULL, editable  = FALSE) %>%
+  formatStyle("Monto solicitado",'text-align'="right") 
+```
+

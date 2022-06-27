@@ -1,0 +1,28 @@
+"";"Estado proceso";"Estado agrupado";"DGAGN";"freq"
+"1";"Adjudicado";"Autorizada";"Otro";29
+"2";"Adjudicado";"Autorizada";"vacio";403
+"3";"Adjudicado";"Pendiente";"vacio";1
+"4";"Adjudicado con doc. contractuales autorizados";"Autorizada";"Otro";1
+"5";"Adjudicado con doc. contractuales generados";"Autorizada";"Otro";2
+"6";"Dejado Sin Efecto";"Autorizada";"Otro";6
+"7";"Dejado Sin Efecto";"Autorizada";"vacio";3
+"8";"Desierto";"Autorizada";"Otro";19
+"9";"Desierto";"Autorizada";"vacio";35
+"10";"Desierto";"Pendiente";"vacio";2
+"11";"Disponible Para Adjudicar";"Autorizada";"Otro";18
+"12";"En Apertura";"Autorizada";"Otro";39
+"13";"En Apertura";"Autorizada";"vacio";1
+"14";"En Apertura";"Pendiente";"Otro";1
+"15";"En Evaluacion";"Autorizada";"Otro";76
+"16";"En Evaluacion";"Autorizada";"vacio";2
+"17";"Fracasado";"Autorizada";"Otro";13
+"18";"Fracasado";"Autorizada";"vacio";1
+"19";"Fracasado";"Pendiente";"vacio";2
+"20";"Ingresado";"Autorizada";"Otro";36
+"21";"Ingresado";"Autorizada";"vacio";4
+"22";"Pendiente Adjudicaci?n";"Autorizada";"Otro";4
+"23";"Pendiente Autorizar Ordenes Compra";"Autorizada";"vacio";3
+"24";"Preadjudicado";"Autorizada";"Otro";14
+"25";"Publicado";"Autorizada";"Otro";13
+"26";NA;NA;"Otro";21
+"27";NA;NA;"vacio";195

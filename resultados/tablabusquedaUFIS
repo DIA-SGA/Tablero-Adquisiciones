@@ -1,0 +1,75 @@
+"";"Organismo";"substr(`Tipo de trámite`, 1, 9)";"n()"
+"1";"Subsecretaría de gestión administrativa";"AABE00008";3
+"2";"Subsecretaría de gestión administrativa";"GENE00000";6
+"3";"Subsecretaría de gestión administrativa";"GENE00001";1
+"4";"Subsecretaría de gestión administrativa";"GENE00002";11
+"5";"Subsecretaría de gestión administrativa";"GENE00003";14
+"6";"Subsecretaría de gestión administrativa";"GENE00012";523
+"7";"Subsecretaría de gestión administrativa";"GENE00054";6
+"8";"Subsecretaría de gestión administrativa";"GENE00055";34
+"9";"Subsecretaría de gestión administrativa";"GENE00056";8
+"10";"Subsecretaría de gestión administrativa";"GENE00065";7
+"11";"Subsecretaría de gestión administrativa";"GENE00067";1
+"12";"Subsecretaría de gestión administrativa";"GENE00070";8
+"13";"Subsecretaría de gestión administrativa";"GENE00071";1
+"14";"Subsecretaría de gestión administrativa";"GENE00073";1
+"15";"Subsecretaría de gestión administrativa";"GENE00075";1
+"16";"Subsecretaría de gestión administrativa";"GENE00076";1
+"17";"Subsecretaría de gestión administrativa";"GENE00134";1
+"18";"Subsecretaría de gestión administrativa";"GENE00135";76
+"19";"Subsecretaría de gestión administrativa";"GENE00150";1
+"20";"Subsecretaría de gestión administrativa";"GENE00153";6
+"21";"Subsecretaría de gestión administrativa";"GENE00155";1
+"22";"Subsecretaría de gestión administrativa";"GENE00156";2
+"23";"Subsecretaría de gestión administrativa";"GENE00164";1
+"24";"Subsecretaría de gestión administrativa";"GENE00170";18
+"25";"Subsecretaría de gestión administrativa";"GENE00171";3
+"26";"Subsecretaría de gestión administrativa";"GENE00172";4
+"27";"Subsecretaría de gestión administrativa";"GENE00188";2
+"28";"Subsecretaría de gestión administrativa";"GENE00189";2
+"29";"Subsecretaría de gestión administrativa";"GENE00193";2
+"30";"Subsecretaría de gestión administrativa";"GENE00194";3
+"31";"Subsecretaría de gestión administrativa";"GENE00204";1
+"32";"Subsecretaría de gestión administrativa";"GENE00205";2
+"33";"Subsecretaría de gestión administrativa";"GENE00207";48
+"34";"Subsecretaría de gestión administrativa";"GENE00208";3
+"35";"Subsecretaría de gestión administrativa";"GENE00210";11
+"36";"Subsecretaría de gestión administrativa";"GENE00219";3
+"37";"Subsecretaría de gestión administrativa";"GENE00229";17
+"38";"Subsecretaría de gestión administrativa";"GENE00232";7
+"39";"Subsecretaría de gestión administrativa";"GENE00235";21
+"40";"Subsecretaría de gestión administrativa";"GENE00236";91
+"41";"Subsecretaría de gestión administrativa";"GENE00257";1
+"42";"Subsecretaría de gestión administrativa";"GENE00258";141
+"43";"Subsecretaría de gestión administrativa";"GENE00265";3
+"44";"Subsecretaría de gestión administrativa";"GENE00266";18
+"45";"Subsecretaría de gestión administrativa";"GENE00269";25
+"46";"Subsecretaría de gestión administrativa";"GENE00277";2
+"47";"Subsecretaría de gestión administrativa";"GENE00278";2
+"48";"Subsecretaría de gestión administrativa";"GENE00291";1
+"49";"Subsecretaría de gestión administrativa";"GENE00294";1
+"50";"Subsecretaría de gestión administrativa";"GENE00330";1
+"51";"Subsecretaría de gestión administrativa";"GENE00353";2
+"52";"Subsecretaría de gestión administrativa";"GENE00354";18
+"53";"Subsecretaría de gestión administrativa";"GENE00357";1
+"54";"Subsecretaría de gestión administrativa";"GENE00359";6
+"55";"Subsecretaría de gestión administrativa";"GENE00363";10
+"56";"Subsecretaría de gestión administrativa";"GENE00364";1
+"57";"Subsecretaría de gestión administrativa";"GENE00365";3
+"58";"Subsecretaría de gestión administrativa";"GENE00411";35
+"59";"Subsecretaría de gestión administrativa";"GENE00425";2
+"60";"Subsecretaría de gestión administrativa";"GENE00452";5
+"61";"Subsecretaría de gestión administrativa";"GENE00460";2
+"62";"Subsecretaría de gestión administrativa";"GENE00488";4
+"63";"Subsecretaría de gestión administrativa";"GENE00489";7
+"64";"Subsecretaría de gestión administrativa";"GENE00567";15
+"65";"Subsecretaría de gestión administrativa";"IOPE00013";1
+"66";"Subsecretaría de gestión administrativa";"MHYF00042";1
+"67";"Subsecretaría de gestión administrativa";"MSAL00161";9
+"68";"Unidad de financiamiento internacional de salud";"GENE00135";8
+"69";"Unidad de financiamiento internacional de salud";"GENE00170";1
+"70";"Unidad de financiamiento internacional de salud";"GENE00207";1
+"71";"Unidad de financiamiento internacional de salud";"GENE00258";3
+"72";"Unidad de financiamiento internacional de salud";"GENE00357";7
+"73";"Unidad de financiamiento internacional de salud";"GENE00359";1
+"74";"Unidad de financiamiento internacional de salud";"GENE00411";4

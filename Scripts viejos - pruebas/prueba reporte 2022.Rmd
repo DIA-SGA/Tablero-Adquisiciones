@@ -1,0 +1,70 @@
+---
+title: '**SGA - Tablero de Adquisiciones**'
+output:
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
+    orientation: rows
+    theme: lumen
+    favicon: logo_sga_rojo.png
+    logo: logoMSAL35pctn.png
+  html_document:
+    df_print: paged
+---
+
+```{r echo=F, warning=FALSE, message=FALSE}
+#E)Traigo la tabla final
+library(R.utils)
+library(dplyr)
+#importo base 
+tablafinal<-loadObject("../resultados/base_tabla_reporte.Rbin") %>% 
+  ungroup()
+library(dplyr)
+
+```
+Indicadores 
+===================================== 
+
+Row {.sidenav data-height=180, data-width=150}
+-----------------------------------------------------------------------
+
+```{r}
+library(readxl)
+library(tidyverse)
+### traigo TC al dia de correr el script ##
+dolar<-115.25
+```
+
+```{r}
+monto_total<-tablafinal %>%
+  summarise(total=round(sum(as.numeric(tablafinal$`Importe Total`),na.rm=T)/1000000,0)) %>%
+  mutate(total_final=format(total, big.mark = "."))
+# monto_total<-tabla.para.indicadores %>%
+#   summarise(total=round(sum(as.numeric(tabla.para.indicadores$`Monto solicitado`),na.rm=T)/1000000,0)) %>%
+#   mutate(total_final=format(total, big.mark = "."))
+```
+
+### **Importe estimado de las adquisiciones.**
+```{r fila10a}
+library(flexdashboard)
+valueBox(paste("$ M ",monto_total$total_final,sep=""),
+         icon="fa-money",col="info")
+```
+
+### **Cantidad total de Procesos**
+```{r fila11a}
+library(flexdashboard)
+valueBox(nrow(tablafinal),
+         icon="fa-pencil",col="#E68BFB")
+```
+
+### **Dias promedio desde inicio del proceso y dispersión**
+```{r fila12a}
+library(flexdashboard)
+valueBox(paste(
+  "", round(median(as.numeric(tablafinal$`Días desde el inicio`), na.rm=T),0),":",
+  "",round(IQR(as.numeric(tablafinal$`Días desde el inicio`), na.rm=T),0),
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[2],
+  #quantile(as.numeric(tablafinalEP$`Días desde autorización`), na.rm=T)[4],
+  sep=""),
+  icon="fa-calendar",col="red")
+```

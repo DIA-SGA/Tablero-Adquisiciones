@@ -1,0 +1,19 @@
+"";"Estado proceso";"Estado agrupado";"freq"
+"1";"Adjudicado";"Autorizada";405
+"2";"Adjudicado";"Pendiente";1
+"3";"Dejado Sin Efecto";"Autorizada";9
+"4";"Desierto";"Autorizada";60
+"5";"Desierto";"Pendiente";2
+"6";"Disponible Para Adjudicar";"Autorizada";23
+"7";"En Apertura";"Autorizada";92
+"8";"En Apertura";"Pendiente";1
+"9";"En Evaluacion";"Autorizada";26
+"10";"Fracasado";"Autorizada";12
+"11";"Fracasado";"Pendiente";2
+"12";"Ingresado";"Autorizada";38
+"13";"Pendiente Adjudicaci?n";"Autorizada";1
+"14";"Pendiente Análisis";"Autorizada";3
+"15";"Pendiente Autorizar Ordenes Compra";"Autorizada";3
+"16";"Preadjudicado";"Autorizada";1
+"17";"Publicado";"Autorizada";9
+"18";NA;NA;206
